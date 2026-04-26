@@ -1,74 +1,71 @@
 import React from 'react';
-import {motion} from 'motion/react';
-import {Activity, RefreshCcw, Database, LayoutDashboard} from 'lucide-react';
-import {cn} from '../lib/utils';
+import { Activity, RefreshCcw, Database, LayoutDashboard } from 'lucide-react';
 
 const features = [
   {
-    title: "Predictive Disruption Engine",
-    description: "Ingests multifaceted data streams—live weather, global news, port traffic—to flag high-risk shipments before a delay occurs.",
+    title: 'Predictive Disruption Engine',
+    description: 'Ingests live weather, port traffic, and news feeds to flag high-risk shipments before a delay occurs.',
     icon: Activity,
-    color: "text-brand-neon"
+    accent: 'text-brand-neon',
   },
   {
-    title: "Dynamic Re-routing Logic",
-    description: "Instantly calculates alternative routes based on cost, fuel efficiency, and time-to-delivery when a disruption is flagged.",
+    title: 'Dynamic Re-routing',
+    description: 'Calculates alternative routes on disruption — optimizing for cost, fuel, and delivery time simultaneously.',
     icon: RefreshCcw,
-    color: "text-brand-warning"
+    accent: 'text-brand-warning',
   },
   {
-    title: "Scalable Data Architecture",
-    description: "Handles millions of concurrent shipments across volatile transportation networks without performance degradation.",
+    title: 'Scalable Architecture',
+    description: 'Handles millions of concurrent shipments across volatile networks without performance degradation.',
     icon: Database,
-    color: "text-brand-success"
+    accent: 'text-brand-success',
   },
   {
-    title: "Automated Execution UI",
-    description: "A dashboard for logistics managers highlighting AI-suggested route adjustments with one-click implementation.",
+    title: 'One-click Execution',
+    description: "AI-suggested route adjustments surface directly in the dashboard — one click to apply, zero manual coordination.",
     icon: LayoutDashboard,
-    color: "text-white"
-  }
+    accent: 'text-white',
+  },
 ];
 
 export default function Features() {
   return (
     <section id="features" className="py-32 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
-          <div className="space-y-4">
-            <h2 className="text-sm font-mono uppercase tracking-[0.4em] text-brand-neon">Core Functionalities</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-medium tracking-tighter">
-              Kills the ripple effect of <br />
-              <span className="italic text-white/50">Supply Chain Latency.</span>
-            </h3>
+        {/* Header */}
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-brand-neon mb-3">
+              Core capabilities
+            </p>
+            <h2 className="text-4xl md:text-5xl font-display font-semibold tracking-tight leading-tight">
+              Everything you need<br />
+              <span className="text-white/30 font-light italic">to stay ahead.</span>
+            </h2>
           </div>
-          <p className="max-w-md text-white/40 font-medium">
-            Our system transitions from reactive detection to proactive mitigation, ensuring resilience is built into every shipment.
+          <p className="max-w-sm text-[14px] text-white/35 leading-relaxed">
+            NorthRoute is built around one idea: your team should know about problems before they become problems.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10 overflow-hidden">
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] border border-white/[0.06] overflow-hidden rounded-xl">
           {features.map((f, i) => (
-            <motion.div 
+            <div
               key={i}
-              initial={{opacity: 0, y: 20}}
-              whileInView={{opacity: 1, y: 0}}
-              viewport={{once: true}}
-              transition={{delay: i * 0.1}}
-              className="group relative p-10 bg-bg-deep hover:bg-bg-card-hover transition-colors"
+              className="group p-8 bg-[#050505] hover:bg-white/[0.02] transition-colors duration-300 flex flex-col gap-6"
             >
-              <div className="space-y-6">
-                <f.icon className={cn("w-10 h-10 transition-transform group-hover:scale-110", f.color)} />
-                <h4 className="text-xl font-display font-bold leading-tight">{f.title}</h4>
-                <p className="text-sm text-white/40 leading-relaxed font-medium">
-                  {f.description}
-                </p>
+              <div className={`w-9 h-9 flex items-center justify-center rounded-lg bg-white/[0.04] group-hover:bg-white/[0.07] transition-colors ${f.accent}`}>
+                <f.icon className="w-4.5 h-4.5" />
               </div>
-              
-              <div className="absolute top-0 right-0 p-4 font-mono text-[10px] opacity-20 group-hover:opacity-100 transition-opacity">
+              <div>
+                <h3 className="text-[15px] font-semibold mb-2 leading-snug">{f.title}</h3>
+                <p className="text-[13px] text-white/35 leading-relaxed">{f.description}</p>
+              </div>
+              <div className="mt-auto text-[10px] font-mono text-white/15 group-hover:text-white/30 transition-colors">
                 MOD_0{i + 1}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

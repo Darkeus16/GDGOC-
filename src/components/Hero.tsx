@@ -1,68 +1,96 @@
-import React from 'react';
-import {motion} from 'motion/react';
-import {ArrowRight, ShieldAlert, Cpu} from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+
+const STATS = [
+  { value: '99.4%', label: 'On-time prediction accuracy' },
+  { value: '<2ms', label: 'Detection-to-alert latency' },
+  { value: '10M+', label: 'Shipments processed' },
+];
 
 export default function Hero() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20">
-      <div className="max-w-5xl w-full text-center space-y-8">
-        <motion.div
-           initial={{opacity: 0, y: 20}}
-           animate={{opacity: 1, y: 0}}
-           transition={{duration: 0.8}}
-           className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase bg-brand-neon/10 border border-brand-neon/30 text-brand-neon"
-        >
-          <Cpu className="w-3 h-3" />
-          Aegis Operational Prototype
-        </motion.div>
+    <section className="relative min-h-screen flex flex-col justify-center px-6 pt-24 pb-16 overflow-hidden">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+          backgroundSize: '60px 60px'
+        }}
+      />
 
-        <motion.h1 
-          initial={{opacity: 0, scale: 0.95}}
-          animate={{opacity: 1, scale: 1}}
-          transition={{duration: 0.8, delay: 0.2}}
-          className="text-6xl md:text-8xl font-display font-bold leading-[0.9] tracking-tighter"
-        >
-          AEGIS <span className="text-white/20 italic">LOGISTICS</span> <br/>
-          <span className="text-brand-neon">AI</span> SYSTEMS
-        </motion.h1>
+      {/* Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.07]"
+        style={{ background: 'radial-gradient(circle, #00F0FF 0%, transparent 70%)' }}
+      />
 
-        <motion.p 
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          transition={{duration: 0.8, delay: 0.4}}
-          className="max-w-2xl mx-auto text-lg md:text-xl text-white/60 font-medium"
+      <div className="relative max-w-5xl mx-auto w-full">
+        {/* Eyebrow */}
+        <div
+          className={`inline-flex items-center gap-2 mb-8 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          style={{ transitionDelay: '0ms' }}
         >
-          Transition supply chain management from <span className="text-white font-bold">reactive</span> to <span className="text-brand-neon font-bold">preemptive</span>. Detect disruptions in real-time and automate optimized routing.
-        </motion.p>
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-neon animate-pulse" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-white/40">
+            Supply chain intelligence
+          </span>
+        </div>
 
-        <motion.div 
-          initial={{opacity: 0, y: 20}}
-          animate={{opacity: 1, y: 0}}
-          transition={{duration: 0.8, delay: 0.6}}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+        {/* Headline */}
+        <h1
+          className={`text-[clamp(3rem,8vw,7rem)] font-display font-semibold leading-[0.95] tracking-[-0.03em] mb-8 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+          style={{ transitionDelay: '100ms' }}
         >
-          <a href="#tracking" className="group relative px-8 py-4 bg-white text-black font-bold uppercase tracking-tighter overflow-hidden">
-            <span className="relative z-10 flex items-center gap-2">
-              Launch Prototype <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </span>
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-brand-neon transition-all" />
+          Preemptive
+          <br />
+          <span className="text-white/25 italic font-light">logistics</span>
+          <br />
+          <span className="text-brand-neon">intelligence.</span>
+        </h1>
+
+        {/* Subtext */}
+        <p
+          className={`max-w-xl text-[15px] text-white/40 leading-relaxed mb-12 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+          style={{ transitionDelay: '200ms' }}
+        >
+          NorthRoute shifts your supply chain from reactive firefighting to preemptive control — detecting disruptions before they cascade and routing around them automatically.
+        </p>
+
+        {/* CTAs */}
+        <div
+          className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-20 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+          style={{ transitionDelay: '300ms' }}
+        >
+          <a
+            href="#tracking"
+            className="group flex items-center gap-2 px-6 py-3 bg-white text-black text-[13px] font-semibold rounded-md hover:bg-brand-neon transition-colors duration-200"
+          >
+            Open live demo
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </a>
-          
-          <button className="px-8 py-4 border border-white/20 hover:border-white transition-colors text-white font-bold uppercase tracking-tighter">
-            View Case Study
-          </button>
-        </motion.div>
-      </div>
+          <a
+            href="#features"
+            className="flex items-center gap-2 px-6 py-3 text-[13px] text-white/50 hover:text-white transition-colors duration-200"
+          >
+            See how it works
+          </a>
+        </div>
 
-      <motion.div 
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        transition={{delay: 1, duration: 2}}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30"
-      >
-        <span className="text-[10px] uppercase tracking-[0.3em] font-mono">Kill the bottleneck cascade</span>
-        <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
-      </motion.div>
+        {/* Stats bar */}
+        <div
+          className={`flex flex-col sm:flex-row gap-8 sm:gap-16 pt-8 border-t border-white/[0.07] transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+          style={{ transitionDelay: '400ms' }}
+        >
+          {STATS.map((s) => (
+            <div key={s.label}>
+              <div className="text-2xl font-display font-semibold tracking-tight text-white mb-0.5">{s.value}</div>
+              <div className="text-[11px] text-white/30 uppercase tracking-widest font-mono">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
